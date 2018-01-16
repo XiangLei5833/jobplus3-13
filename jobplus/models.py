@@ -100,4 +100,44 @@ class Seeker(Base):
         return '<Seeker:{}>'.format(self.name)
 
 
-class 
+class Company(Base):
+    __tablename__ = 'company'
+
+    id = db.Column(db.Integer, primary_key=True)
+    company_id = db.Column(db,Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    logo = db.Column(db.String(256), nullable=False)  # url 地址
+    name = db.Column(db.String(128), unique = True, index=True, nullable=False)
+    offical_websit = db.Column(db.String(128), unique=True, nullable=False)
+    description = db.Column(db.String(256), nullable=False)
+    address = db.Column(db.String(128))
+    position_num = db.Column(db.Integer, nullable=False)
+    company_TEL = db.Column(db.String(16))
+    job_list = db.relationship('Job', unlist=False)
+
+    def __repr__(self):
+        return '<Company:{}>'.format(self.name)
+
+
+class Job(Base):
+    __tablename__ = 'job'
+
+    EDU_COLLEGE = 10
+    EDU_BACHELOR = 20
+    EDU_MASTER = 30
+    EDU_PHD = 40
+    EDU_NOLIMIT = 60
+
+    id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    job_name = db.Column(db.String(32), index=True, nullable=False)
+    wage_area = db.Column(db.String(32), nullable=False)
+    working_date_required = db.Column(db.String(16))
+    experience_required = db.Column(db.String(256), nullable=False)
+    edu_required = db.Column(db.smallInteger, default=EDU_NOLIMIT)
+    working_address = db.Column(db.String(16), nullable=False)
+    company_info = db.relationship('Company')
+    release_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    job_description = db.Column(db.String(256), nullable=False)
+
+    def __repr__(self):
+        return '<Job:{}>'.format(self.name)
