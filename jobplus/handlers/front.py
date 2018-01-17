@@ -6,4 +6,4 @@ front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
-    reutrn render_template('index.html')
+    return render_template('index.html')

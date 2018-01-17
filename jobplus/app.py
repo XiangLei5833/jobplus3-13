@@ -12,7 +12,7 @@ def register_blueprints(app):
     app.register_blueprint(company)
     app.register_blueprint(job)
     app.register_blueprint(admin)
-    app.regidter_blueprint(tests)
+    app.register_blueprint(tests)
 
 def create_app(config):
     """ App 工厂 """

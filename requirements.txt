@@ -9,3 +9,4 @@ pylint == 1.7.2
 pytest-flask == 0.10.0
 flask-shell-ipython == 0.3.0
 werkzeug == 0.14.1
+virtualenv
