@@ -1,3 +1,4 @@
+
 # -*- coding:utf-8 -*-
 
 from flask import Flask
@@ -13,6 +14,7 @@ def register_blueprints(app):
     app.register_blueprint(job)
     app.register_blueprint(admin)
     app.register_blueprint(tests)
+
 
 def create_app(config):
     """ App 工厂 """

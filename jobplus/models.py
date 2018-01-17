@@ -1,4 +1,5 @@
 # -*- coding:utf8 -*-
+# 存放数据模型相关代码
 
 from flask_login import UserMixin
 # 使用 flask_login 进行用户的登入登出管理，需要 User 类继承 flask_login 的 UserMixin
