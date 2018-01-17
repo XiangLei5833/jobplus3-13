@@ -1,5 +1,6 @@
-from simpledu.app import create_app
+# -*- coding:utf-8 -*-
 
+from jobplus.app import create_app
 
 # 使用开发环境配置
 app = create_app('development')
