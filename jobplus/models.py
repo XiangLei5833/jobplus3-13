@@ -1,10 +1,10 @@
-# 存放数据模型相关代码
+# -*- coding:utf8 -*-
 
 from flask_login import UserMixin
 # 使用 flask_login 进行用户的登入登出管理，需要 User 类继承 flask_login 的 UserMixin
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.seurity import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 # flask 底层库提供了生成哈希密码的函数和检测密码哈希和密码是否相等的函数
 
 db = SQLAlchemy()  # 此处不传入 app，因为 app 还没有进行定义
@@ -37,8 +37,8 @@ class User(Base, UserMixin):
     # 默认情况下，sqlalchemy 会以字段名来定义列名，但这里是 _password，为似有字段，故需明确的指定数据库名为 password
     role = db.Column(db.SmallInteger, default=ROLE_SEEKER)
     job = db.Column(db.String(64))
-    seeker_info = db.relationship('Seeker', unlist=False)
-    company_info = db.relationship('Company', unlist=False)
+    seeker_info = db.relationship('Seeker', uselist=False)
+    company_info = db.relationship('Company', uselist=False)
 
     def __repr__(self):
         return '<User:{}>'.format(self.username)
@@ -89,7 +89,7 @@ class Seeker(Base):
     gender = db.Column(db.SmallInteger, default=G_MALE, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     image_url = db.Column(db.String(256))  # 个人主页的图像
-    education = db.Column(db.SmallIngeter, default=EDU_BACHELOR, nullable=False)
+    education = db.Column(db.SmallInteger, default=EDU_BACHELOR, nullable=False)
     college = db.Column(db.String(128), nullable=False) 
     major = db.Column(db.String(128), nullable=False)
     working_years = db.Column(db.Integer)
@@ -104,7 +104,7 @@ class Company(Base):
     __tablename__ = 'company'
 
     id = db.Column(db.Integer, primary_key=True)
-    company_id = db.Column(db,Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    company_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
     logo = db.Column(db.String(256), nullable=False)  # url 地址
     name = db.Column(db.String(128), unique = True, index=True, nullable=False)
     offical_websit = db.Column(db.String(128), unique=True, nullable=False)
@@ -112,7 +112,7 @@ class Company(Base):
     address = db.Column(db.String(128))
     position_num = db.Column(db.Integer, nullable=False)
     company_TEL = db.Column(db.String(16))
-    job_list = db.relationship('Job', unlist=False)
+    job_list = db.relationship('Job', uselist=False)
 
     def __repr__(self):
         return '<Company:{}>'.format(self.name)
@@ -133,7 +133,7 @@ class Job(Base):
     wage_area = db.Column(db.String(32), nullable=False)
     working_date_required = db.Column(db.String(16))
     experience_required = db.Column(db.String(256), nullable=False)
-    edu_required = db.Column(db.smallInteger, default=EDU_NOLIMIT)
+    edu_required = db.Column(db.SmallInteger, default=EDU_NOLIMIT)
     working_address = db.Column(db.String(16), nullable=False)
     company_info = db.relationship('Company')
     release_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
