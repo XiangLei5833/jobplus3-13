@@ -1,30 +1,11 @@
 {% extends "base.html" %}
+{% from "macros.html" import render_form %}
 
 {% block title %} Seeker Register{% endblock %}
 
 {% block body %}
+<div class="form">
     <h2>求职者注册</h2>
-    <div class="form">
-        <form method="POST" action="{{ url_for('front.seeker_register') }}">
-            {{ form.csrf_token }}
-
-            <div class="form-group">
-                {{ form.username.label }} {{ form.username(class='form-control') }}
-            </div>
-
-            <div class="form-group">
-                {{ form.email.label }} {{ form.email(class='form-control') }}
-            </div>
-
-            <div class="form-group">
-                {{ form.password.label }} {{ form.password(class='form-control') }}
-            </div>
-
-            <div class="form-group">
-                {{ form.repeat_password.label }} {{ form.repeat_password(class='form-control') }}
-            </div>
-
-            {{ form.submit(class='btn btn-primary', type='submit') }}
-        </form>
-    </div>
+    {{ render_form(form, url_for('front.seeker_register')) }}
+</div>
 {% endblock %}
