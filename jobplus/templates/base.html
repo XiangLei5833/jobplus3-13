@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<!-- lang 规定元素内容的语言 -->
     <head>
         <meta charset="UTF-8">
+        <!-- meta 提供有关页面的元信息 -->
         <title>{% block title %}{% endblock %}</title>
+        <!-- block 拥有可继承属性，使用 block 将页面划分为不同的区块 -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="static/main.css">
+        <link rel="stylesheet" href="static/main.css">
+        <!-- rel 规定当前文档和被链接文档之间的关系 -->
     </head>
-    <body>
+
         <nav class="navbar navbar-inverse">
             <div class="container">
                 <!-- brand 和 toggle 被分组，以获得更好的移动显示 -->
@@ -28,9 +32,9 @@
                         <li><a href="#">公司</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">公司注册</a></li>
-                        <li><a href="#">求职者注册</a></li>
-                        <li><a href="#">登录</a></li>
+                        <li><a href="{{ url_for('front.company_register') }}">公司注册</a></li>
+                        <li><a href="{{ url_for('front.seeker_register') }}">求职者注册</a></li>
+                        <li><a href="{{ url_for('front.login') }}">登录</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

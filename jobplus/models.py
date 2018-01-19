@@ -63,10 +63,6 @@ class User(Base, UserMixin):
         return self.role == self.ROLE_COMPANY
 
     @property
-    def is_seeker(self):
-        return self.role == self.ROLE_SEEKER
-
-    @property
     def is_admin(self):
         return self.role == self.ROLE_ADMIN
 
