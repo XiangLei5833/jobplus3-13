@@ -17,8 +17,17 @@
             <label>{{ field() }} {{ field.label.text }}</label>
         </div>
         {% else %}
-        <div class="form-group">
-            {{ field.label }}  {{ field(class='form-control') }}
+        <div class="from-group">
+            <!-- 当 errors 不为空， 添加 has-error 类， 这样输入框就变成红色了 -->
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+                {{ field.label }} {{ field(class='form-control') }}
+                 <!-- 当 errors 不为空，遍历显示每一个 error -->
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
         {% endif %}
     {% endfor %}

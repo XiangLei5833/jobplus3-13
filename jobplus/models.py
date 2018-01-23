@@ -125,7 +125,7 @@ class Job(Base):
     EDU_NOLIMIT = 60
 
     id = db.Column(db.Integer, primary_key=True)
-    job_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    job_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete="CASCADE"))
     job_name = db.Column(db.String(32), index=True, nullable=False)
     wage_area = db.Column(db.String(32), nullable=False)
     working_date_required = db.Column(db.String(16))
