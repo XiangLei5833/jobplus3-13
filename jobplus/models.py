@@ -1,6 +1,7 @@
 # -*- coding:utf8 -*-
 # 存放数据模型相关代码
 
+from flask import url_for
 from flask_login import UserMixin
 # 使用 flask_login 进行用户的登入登出管理，需要 User 类继承 flask_login 的 UserMixin
 from datetime import datetime
@@ -80,7 +81,7 @@ class Seeker(Base):
     EDU_OTHER = 50
 
     id = db.Column(db.Integer, primary_key=True)
-    seeker_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
     name = db.Column(db.String(128), unique=True, index=True, nullable=False)
     gender = db.Column(db.SmallInteger, default=G_MALE, nullable=False)
     age = db.Column(db.Integer, nullable=False)
@@ -100,11 +101,14 @@ class Company(Base):
     __tablename__ = 'company'
 
     id = db.Column(db.Integer, primary_key=True)
-    company_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
     logo = db.Column(db.String(256))  # url 地址
-    name = db.Column(db.String(128), unique = True, index=True, nullable=False)
+    company_name = db.Column(db.String(128), unique = True, index=True, nullable=False)
     offical_websit = db.Column(db.String(128), unique=True, nullable=False)
-    description = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.String(256))
+    industry = db.Column(db.String(16))
+    stage = db.Column(db.String(16))
+    city = db.Column(db.String(16))
     address = db.Column(db.String(128))
     position_num = db.Column(db.Integer)
     company_TEL = db.Column(db.String(16))
@@ -113,6 +117,9 @@ class Company(Base):
     def __repr__(self):
         return '<Company:{}>'.format(self.name)
 
+    @property
+    def url(self):
+        return url_for('company.detail', course_id=self.id)
 
 class Job(Base):
     __tablename__ = 'job'
@@ -124,7 +131,7 @@ class Job(Base):
     EDU_NOLIMIT = 60
 
     id = db.Column(db.Integer, primary_key=True)
-    job_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete="CASCADE"))
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete="CASCADE"))
     job_name = db.Column(db.String(32), index=True, nullable=False)
     wage_area = db.Column(db.String(32), nullable=False)
     working_date_required = db.Column(db.String(16))
@@ -133,7 +140,7 @@ class Job(Base):
     working_address = db.Column(db.String(16), nullable=False)
     company_info = db.relationship('Company')
     release_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    job_description = db.Column(db.String(256), nullable=False)
+    job_description = db.Column(db.String(256))
 
     @property
     def url(self):

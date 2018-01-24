@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, SelectField, SubmitField, Boolea
 from wtforms.validators import Length, Email, EqualTo, Required  # validators 添加了验证
 from jobplus.models import db, User, Seeker, Company, Job
 
-class Company_RegisterForm(FlaskForm):
+class Seeker_RegisterForm(FlaskForm):
     username = StringField('用户名', validators=[Required(), Length(3,24)])  # 验证长度，即限定长度
     email = StringField('邮箱', validators=[Required(), Email()])  # 必须符合 email 的格式
     password = PasswordField('密码', validators=[Required(), Length(6,24)])
@@ -28,6 +28,14 @@ class Company_RegisterForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('邮箱已经存在')
+
+
+class Company_RegisterForm(FlaskForm):
+    username = StringField('用户名', validators=[Required(), Length(3,24)])  # 验证长度，即限定长度
+    email = StringField('邮箱', validators=[Required(), Email()])  # 必须符合 email 的格式
+    password = PasswordField('密码', validators=[Required(), Length(6,24)])
+    repeat_password = PasswordField('重复密码', validators=[Required(), EqualTo('password')])
+    submit = SubmitField('提交')
 
     def create_user(self):
         user = User()
@@ -102,7 +110,7 @@ class SeekerForm(FlaskForm):
 
 
 class CompanyForm(FlaskForm):
-    name = StringField('公司名称', validators=[Required(), Length(3,24)])
+    company_name = StringField('公司名称', validators=[Required(), Length(3,24)])
     offical_websit = StringField('官网', validators=[Required(), Length(3,50)])
     address = StringField('公司地址', validators=[Required(), Length(3,50)])
     company_TEL = StringField('公司电话', validators=[Required(), Length(11, 13)])
@@ -111,11 +119,11 @@ class CompanyForm(FlaskForm):
 
     def create_company(self):
         company = Company()
-        company.name = self.name.data
+        company.company_name = self.company_name.data
         company.offical_websit = self.offical_websit.data
         company.address = self.offical_websit.data
         company.company_TEL = self.company_TEL.data
-        company.description = self.dexcription.data
+        company.description = self.description.data
         db.session.add(company)
         db.session.commit()
         return company
