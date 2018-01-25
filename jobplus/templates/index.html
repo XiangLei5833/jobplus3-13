@@ -9,5 +9,63 @@
         <h1 style="text-align:center; color:whitesmoke">Jobplus</h1>
         <p style="text-align:center; font-size:30px; color:whitesmoke">这是一家专注招聘的网站</p>
         <center><p><a class="btn btn-primary btn-lg" href="#" role="button" style="background-color:transparent; ">了解更多</a></p></center>
+    </div>
 </div>
+
+<div class="container">
+    <h3>
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">热门职位</a></li>
+            <li role="presentation"><a href="#">最新职位</a><li>
+        </ul>
+    </h3>
+    <div class="row" style="margin-top:15px">
+        {% for job in jobs %}
+        <div class="col-sm-6 col-md-4 job">
+            <div class="thumbnail">
+                <a href="#" target="_blank" style="width:50px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{job.job_name}}">{{ job.job_name }}
+                </a>
+                <p style="color:red; font-size:16px">{{ job.wage_area }}</p>
+                <p style="color:gray; font-size:14px">{{ job.experience_required }}/{{ job.edu_required }}/{{ job.working_address }}</p>
+                <p style="color:gray; font-size:14px">{{ job.release_date }}</p>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <center>
+            <a class="btn btn-default btn-lg" role="button" href="#" style="width:200px">查看更多</a>
+    </center>
+    <h3>
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">热门公司</a></li>
+        </ul>
+    </h3>
+    <div class="row">
+        {% for company in companys %}
+        <div class="col-sm-6 col-md-4 company">
+            <div class="thumbnail">
+                <center><a href="{{ company.offical_websit }}" target="_blank">
+                        <img src="{{ company.logo }}" alt="logo">
+                        <div class="caption">
+                            <h4>{{company.company_name}}</h4>
+                        </div>
+                        </a>
+                </center>
+                <p style="color:gray; text-align:center; font-size:14px">{{ company.industry }}/{{ company.stage }}/{{ company.city }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <center>
+            <a class="btn btn-default btn-lg" role="button" href="#" style="width:200px">查看更多</a>
+    </center>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer style="color:gray; margin-top:100px">
+    <hr/>
+    &copy; Jobplus:专注遇见更好的自己
+</footer>
 {% endblock %}
