@@ -104,16 +104,18 @@ class Company(Base):
     stage = db.Column(db.String(16))
     city = db.Column(db.String(16))
     address = db.Column(db.String(128))
+    # 在招职位
     position_num = db.Column(db.Integer)
     company_TEL = db.Column(db.String(16))
     job_list = db.relationship('Job', uselist=False)
+
 
     def __repr__(self):
         return '<Company:{}>'.format(self.name)
 
     @property
     def url(self):
-        return url_for('company.detail', company_id=self.id)
+        return url_for('company.detail', id=self.id)
 
 class Job(Base):
     __tablename__ = 'job'
@@ -138,7 +140,7 @@ class Job(Base):
 
     @property
     def url(self):
-        return url_for('job.detail', course_id=self.id)
+        return url_for('job.detail', id=self.id)
 
     def __repr__(self):
         return '<Job:{}>'.format(self.name)

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}公司列表{% endblock %}
+
+{% block body %}
+<div class="jumbotron" style="background-color:indigo; margin-top:-20px">
+    <h1 style="text-align:center; color:whitesmoke">值得期待的...</h1>
+    <!--
+    <nav aria-label="Page navigation">
+        <ul class="pager">
+            <li class="previous"><a href="#"><span aria-hidden="true" style="background-color:transparent; color:white">&larr;</span></a></li>
+            <li class="next"><a href="#"><span aria-hidden="true" style="background-color:transparent; color:white">&rarr;</span></a><li>
+        </ul>
+    </nav>-->
+</div>
+
+<div class="container">
+   <div class="row">
+        {% for company in pagination.items %}
+        <div class="col-sm-6 col-md-3 company">
+            <div class="thumbnail">
+                <center><a href="{{ company.url }}" target="_blank">
+                        <img src="{{ company.logo }}" alt="logo">
+                        <div class="caption">
+                            <h4>{{company.company_name}}</h4>
+                        </div>
+                        </a>
+                </center>
+                <p style="color:gray; text-align:center; font-size:14px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{ company.industry }}/{{ company.stage }}/{{ company.city }}">{{ company.industry }}/{{ company.stage }}/{{ company.city }}</p>
+              <!--  <div class="col-sm-6 col-md-4 company">
+                    <div class="thumbnail">
+                        <center><a href="#" target="_blank">
+                                    <p style="color:green">0</p>
+                                    <p style="color:gray; font-size:10px">评价</p>
+                                </a>
+                        </center>-->
+ 
+            </div>
+        </div>
+        {% endfor %}
+    </div> 
+
+{% endblock %}

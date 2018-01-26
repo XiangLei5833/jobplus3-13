@@ -4,3 +4,7 @@
     /* 设置 form 居中 */
     margin: 0 auto;
         }
+
+.nav-pagination {
+    text-align: center;
+                }

@@ -23,7 +23,7 @@
         {% for job in jobs %}
         <div class="col-sm-6 col-md-4 job">
             <div class="thumbnail">
-                <a href="#" target="_blank" style="width:50px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{job.job_name}}">{{ job.job_name }}
+                <a href="{{job.url}}" target="_blank" style="width:50px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{job.job_name}}">{{ job.job_name }}
                 </a>
                 <p style="color:red; font-size:16px">{{ job.wage_area }}</p>
                 <p style="color:gray; font-size:14px">{{ job.experience_required }}/{{ job.edu_required }}/{{ job.working_address }}</p>
@@ -34,7 +34,7 @@
         {% endfor %}
     </div>
     <center>
-            <a class="btn btn-default btn-lg" role="button" href="#" style="width:200px">查看更多</a>
+        <a class="btn btn-default btn-lg" role="button" href="#" style="width:200px">查看更多</a>
     </center>
     <h3>
         <ul class="nav nav-tabs">
@@ -45,7 +45,7 @@
         {% for company in companys %}
         <div class="col-sm-6 col-md-4 company">
             <div class="thumbnail">
-                <center><a href="{{ company.offical_websit }}" target="_blank">
+                <center><a href="{{ company.url }}" target="_blank">
                         <img src="{{ company.logo }}" alt="logo">
                         <div class="caption">
                             <h4>{{company.company_name}}</h4>
@@ -58,9 +58,10 @@
         {% endfor %}
     </div>
     <center>
-            <a class="btn btn-default btn-lg" role="button" href="#" style="width:200px">查看更多</a>
+        <a class="btn btn-default btn-lg" role="button" href="{{ url_for('company.company_list')}}" style="width:200px">查看更多</a>
     </center>
 </div>
+<!-- 使用 macro 渲染分页组件 -->
 {% endblock %}
 
 {% block footer %}
