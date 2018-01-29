@@ -135,7 +135,9 @@ class Job(Base):
     edu_required = db.Column(db.SmallInteger, default=EDU_NOLIMIT)
     working_address = db.Column(db.String(16), nullable=False)
     company_info = db.relationship('Company')
+
     release_date = db.Column(db.String(32))
+
     job_description = db.Column(db.String(256))
 
     @property
