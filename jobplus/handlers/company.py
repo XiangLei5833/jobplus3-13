@@ -1,3 +1,4 @@
+
 from flask import Blueprint, render_template, flash, request, current_app
 from jobplus.forms import CompanyForm
 from jobplus.models import Company
