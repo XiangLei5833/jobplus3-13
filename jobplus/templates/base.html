@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html> <html lang="zh-CN">
+
 <!-- lang 规定元素内容的语言 -->
     <head>
         <meta charset="UTF-8">
@@ -22,14 +22,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand">Jobplus</a>
+                    <a class="navbar-brand" href='/'>Jobplus</a>
                 </div>
 
                 <!-- 收集导航链接，窗体和其他内容用于切换 -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">职位</a></li>
+                        <li><a href="{{url_for('job.job_list')}}">职位</a></li>
                         <li><a href="{{url_for('company.company_list')}}">公司</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

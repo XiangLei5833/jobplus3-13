@@ -21,20 +21,28 @@
     </h3>
     <div class="row" style="margin-top:15px">
         {% for job in jobs %}
+        {% set c = job.company_id %}
+        {% set company = Company.query.get_or_404(c) %}
         <div class="col-sm-6 col-md-4 job">
-            <div class="thumbnail">
-                <a href="{{job.url}}" target="_blank" style="width:50px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{job.job_name}}">{{ job.job_name }}
+            <div class="thumbnail" style="overflow:hidden; width:100%">
+                <a href="{{job.url}}" target="_blank" style="width:30%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{job.job_name}}">{{ job.job_name }}
                 </a>
-                <p style="color:red; font-size:16px">{{ job.wage_area }}</p>
-                <p style="color:gray; font-size:14px">{{ job.experience_required }}/{{ job.edu_required }}/{{ job.working_address }}</p>
+                <span style="color:red; font-size:16px; float:right">{{ job.wage_area }}</span>
+                <p style="color:gray; font-size:14px; margin-top:10px">{{ job.experience_required }}/{{ job.edu_required }}/{{ job.working_address }}</p>
                 <p style="color:gray; font-size:14px">{{ job.release_date }}</p>
+                <p style="color:gray; font-size:14px">{{ job.job_attr }}</p>
+                <hr/> 
+                <a href="{{company.url}}" style="float:left">
+                    <img style="width:60px; height:60px" src="{{company.logo}}" alt="公司logo">
                 </a>
+                <a href="{{company.url}}" style="float:left; margin-left:10px; width:70%; height:20px"><h5 class="media-heading">{{company.company_name}}</h5></a>
+                <p style="float:left; margin-left:10px">{{company.company_attr}}/{{company.stage}}</p>
             </div>
         </div>
         {% endfor %}
     </div>
     <center>
-        <a class="btn btn-default btn-lg" role="button" href="#" style="width:200px">查看更多</a>
+        <a class="btn btn-default btn-lg" role="button" href="{{url_for('job.job_list')}}" style="width:200px">查看更多</a>
     </center>
     <h3>
         <ul class="nav nav-tabs">
@@ -46,7 +54,7 @@
         <div class="col-sm-6 col-md-4 company">
             <div class="thumbnail">
                 <center><a href="{{ company.url }}" target="_blank">
-                        <img src="{{ company.logo }}" alt="logo">
+                        <img src="{{ company.logo }}" alt="logo" height="160" width="160"/>
                         <div class="caption">
                             <h4>{{company.company_name}}</h4>
                         </div>

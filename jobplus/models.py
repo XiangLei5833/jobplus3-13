@@ -1,4 +1,4 @@
-# -*- coding:utf8 -*-
+
 # 存放数据模型相关代码
 
 from flask import url_for
@@ -98,49 +98,57 @@ class Company(Base):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"))
     logo = db.Column(db.String(256))  # url 地址
     company_name = db.Column(db.String(128), unique = True, index=True, nullable=False)
-    offical_websit = db.Column(db.String(128), unique=True, nullable=False)
-    description = db.Column(db.String(256))
-    industry = db.Column(db.String(16))
-    stage = db.Column(db.String(16))
+    offical_websit = db.Column(db.String(128), unique=True)
+    welfare = db.Column(db.String(128))
+    company_attr = db.Column(db.String(16))
+    company_size = db.Column(db.String(8))
+    company_about = db.Column(db.String(128))
+    company_description = db.Column(db.String(256))
+    industry = db.Column(db.String(32))
+    stage = db.Column(db.String(32))
     city = db.Column(db.String(16))
-    address = db.Column(db.String(128))
+    company_address = db.Column(db.String(128))
     # 在招职位
     position_num = db.Column(db.Integer)
     company_TEL = db.Column(db.String(16))
-    job_list = db.relationship('Job', uselist=False)
-
+    job_list = db.relationship('Job')
 
     def __repr__(self):
-        return '<Company:{}>'.format(self.name)
+        return '<Company:{}>'.format(self.company_name)
 
     @property
     def url(self):
         return url_for('company.detail', id=self.id)
 
+
 class Job(Base):
     __tablename__ = 'job'
 
-    EDU_COLLEGE = 10
-    EDU_BACHELOR = 20
-    EDU_MASTER = 30
-    EDU_PHD = 40
-    EDU_NOLIMIT = 60
+   # EDU_COLLEGE = 10
+   # EDU_BACHELOR = 20
+   # EDU_MASTER = 30
+   # EDU_PHD = 40
+   # EDU_NOLIMIT = 60
 
     id = db.Column(db.Integer, primary_key=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id', ondelete="CASCADE"))
     job_name = db.Column(db.String(32), index=True, nullable=False)
     wage_area = db.Column(db.String(32), nullable=False)
-    working_date_required = db.Column(db.String(16))
     experience_required = db.Column(db.String(256), nullable=False)
-    edu_required = db.Column(db.SmallInteger, default=EDU_NOLIMIT)
+    edu_required = db.Column(db.String(8), nullable=False)
+    job_attr = db.Column(db.String(32))
+    job_nature = db.Column(db.String(8))
     working_address = db.Column(db.String(16), nullable=False)
+    job_tempt = db.Column(db.String(256))
+    welfare = db.Column(db.String(8))
     company_info = db.relationship('Company')
     release_date = db.Column(db.String(32))
     job_description = db.Column(db.String(256))
+    company = db.relationship('Company', uselist=False)
 
     @property
     def url(self):
         return url_for('job.detail', id=self.id)
 
     def __repr__(self):
-        return '<Job:{}>'.format(self.name)
+        return '<Job:{}>'.format(self.job_name)

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "macros_page.html" import render_pagination %}
 
 {% block title %}公司列表{% endblock %}
 
@@ -20,9 +21,9 @@
         <div class="col-sm-6 col-md-3 company">
             <div class="thumbnail">
                 <center><a href="{{ company.url }}" target="_blank">
-                        <img src="{{ company.logo }}" alt="logo">
+                        <img src="{{ company.logo }}" alt="logo" height="80" width="80">
                         <div class="caption">
-                            <h4>{{company.company_name}}</h4>
+                            <h4 style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{company.company_name}}">{{company.company_name}}</h4>
                         </div>
                         </a>
                 </center>
@@ -38,6 +39,7 @@
             </div>
         </div>
         {% endfor %}
-    </div> 
-
+    </div>
+</div>
+{{ render_pagination(pagination, 'company.company_list') }}
 {% endblock %}

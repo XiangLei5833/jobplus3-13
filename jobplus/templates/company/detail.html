@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="jumbotron" style="background:white">
-    <div class="media">
+    <div class="media" style="margin-left:15px">
         <div class="media-left">
             <a href="{{ company.offical_websit }}">
                 <img class="media-object" src="{{ company.logo }}" alt="logo">
@@ -14,16 +14,20 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">{{ company.company_name }}</h4>
+            <button type="button" class="btn btn-default btn-xs" style="background-color:limegreen">
+                <span class="glyphicon glyphicon-tags" aria-hidden="true" title="该企业已上传营业执照并通过资质验证审核" style="color:white">&ensp;已认证</span>                                </button>
             <p style="color:gray; font-size:14px; margin-top:20px">{{ company.industry }}/{{ company.stage }}/{{ company.city }}</p>
             <a>{{ company.offical_websit }}</a>
         </div>
     </div>
 </div>
 
-<h4>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">公司详情</a></li>
-        <li role="presentation"><a href="#">招聘岗位</a></li>
-    </ul>
-</h4>
+<div class="container">
+    <h4>
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">公司详情</a></li>
+            <li role="presentation"><a href="#">招聘岗位</a></li>
+        </ul>
+    </h4>
+</div>
 {% endblock %}

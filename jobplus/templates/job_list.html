@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "macros_page.html" import render_pagination %}
 
 {% block title %}职位列表{% endblock %}
 
@@ -14,31 +15,53 @@
     </nav>-->
 </div>
 
-<div class="container">
-   <div class="row">
-        {% for job in pagination.items %}
-        <div class="col-sm-6 col-md-3 company">
-            <div class="thumbnail">
-                <center><a href="{{ job.url }}" target="_blank">
-                        
-                        <div class="caption">
-                            <h4>{{company.company_name}}</h4>
-                        </div>
-                        </a>
-                </center>
-                <p style="color:gray; text-align:center; font-size:14px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap" title="{{ company.industry }}/{{ company.stage }}/{{ company.city }}">{{ company.industry }}/{{ company.stage }}/{{ company.city }}</p>
-              <!--  <div class="col-sm-6 col-md-4 company">
-                    <div class="thumbnail">
-                        <center><a href="#" target="_blank">
-                                    <p style="color:green">0</p>
-                                    <p style="color:gray; font-size:10px">评价</p>
-                                </a>
-                        </center>-->
-
+<div class="job_list">
+{% for job in pagination.items %}
+{% set c = job.company_id %}
+{% set company = Company.query.get_or_404(c) %}
+    <div class="bg-success", style="height:150px; clear:both">
+        <div class="container">
+            <div class="position" style="float:left; height:130px; width:50%">
+                <div class="pisition_link">
+                    <a href="{{ job.url }}" target="_blank" style="color:yellowgreen"><h3>{{job.job_name}}[{{job.working_address}}]</h3>
+                    </a>
+                    <span class="re_time">{{job.release_date}}</span>
+                </div>
+                <div class="salary_link">
+                    <span class="money" style="color:red">{{job.wage_area}}</span>
+                    &emsp;{{job.experience_required}}/{{job.edu_required}}
+                </div>
+                <div class="position_bol">
+                    <span style="font-size:14px">{{job.job_attr}}</span>
+                </div>
+            </div>
+            
+            <div class="company" style="float:left; height:130px; width:35%">
+                <div class="company_name">
+                    <a href="{{company.url}}" target="_blank"><h3 style="color:yellowgreen">{{company.company_name}}</h3></a>
+                    <i class="company_mark">
+                        <span class="glyphicon glyphicon-tags" aria-hidden="true" title="该企业已上传营业执照并通过资质验证审核">
+                        </span>
+                    </i>
+                </div>
+                <div class="industry">
+                    {{company.industry }}/{{ company.stage }}
+                </div>
+                <div class="company_bol">
+                    {{company.welfare}}
+                </div>
+            </div>
+            <div class="com_logo" style="float:right; margin:30px">
+                <a href="{{company.url}}" target="_blank">
+                    <img src="{{company.logo}}" width="80", height="80">
+                </a>
+                </div>
             </div>
         </div>
-        {% endfor %}
     </div>
-
+    <br/>
+{% endfor %}
+</div>
+{{ render_pagination(pagination, 'job.job_list') }}
 {% endblock %}
-                     
+

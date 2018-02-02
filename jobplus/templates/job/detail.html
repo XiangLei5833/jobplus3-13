@@ -6,25 +6,28 @@
 
 {% block body %}
 <div class="jumbotron">
-    <h2>{{job.job_name}}</h2>
-    <p><span style="color:red">{{ job.wage_area }}</span>/{{ job.working_address }}/{{ job.experience_required }}/{{ job.edu_required }}</p>
-    <p style="color:gray">{{ job.release_date }}</p>
+    <div class="container">
+        <h2>{{job.job_name}}</h2>
+        <p><span style="color:red">{{ job.wage_area }}</span>/{{ job.working_address }}/{{ job.experience_required }}/{{ job.edu_required }}</p>
+        <p style="color:gray">{{ job.release_date }}</p>
+    </div>
 </div>
 
-<h4 style="font-family:'黑体'">职位诱惑</h4>
-<p style="font-size:14px">******</p>
-<hr/>
+<div class="container">
+    <b><h4>职位诱惑</h4></b>
+    <p style="font-size:14px">{{job.job_tempt}}</p>
+    <hr/>
 
-<h4 style="font-family:'黑体'">职位描述</h4>
-<ol style="font-size:14px">
-    <li>.....</li>
-    <li>.....</li>
-    <li>.....</li>
-</ol>
-<hr/>
+    <b><h4>职位描述</h4></b>
+    <ol style="font-size:14px">
+        <li>.....</li>
+        <li>.....</li>
+        <li>.....</li>
+    </ol>
+    <hr/>
 
-<h4 style="font-family:'黑体'">工作地址</h4>
-<pstyle="font-size:14px">******</p>
-<hr/>
-
+    <b><h4>工作地址</h4></b>
+    <p style="font-size:14px">******</p>
+    <hr/>
+</div>
 {% endblock %}
