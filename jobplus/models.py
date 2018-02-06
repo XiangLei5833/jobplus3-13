@@ -143,7 +143,7 @@ class Job(Base):
     welfare = db.Column(db.String(8))
     company_info = db.relationship('Company')
 
-    release_date = db.Column(db.String(32))
+    release_date = db.Column(db.DateTime, default=datetime.utcnow)
 
     job_description = db.Column(db.String(256))
     company = db.relationship('Company', uselist=False)

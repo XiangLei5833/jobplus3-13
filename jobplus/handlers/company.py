@@ -1,7 +1,7 @@
-
 from flask import Blueprint, render_template, flash, request, current_app
-from jobplus.forms import CompanyForm
-from jobplus.models import Company
+from jobplus.forms import CompanyForm, JobForm
+from jobplus.models import Company, Job, User
+from jobplus.decorators import admin_required
 
 company = Blueprint('company', __name__, url_prefix='/companys')
 
@@ -12,6 +12,19 @@ def profile():
         form.create_company()
         flash('已保存', 'success')
     return render_template('company_main.html', form=form)
+
+@company.route('/createbefore')
+def create_before():
+    return render_template('company/create_job_before.html')
+
+@company.route('/create', methods=['GET', 'POST'])
+def create_job():
+    form = JobForm()
+    if form.validate_on_submit():
+        form.create_job()
+        flash('职位创建成功', 'success')
+    return render_template('company/create_job.html', form=form)
+    
 
 @company.route('/')
 def company_list():

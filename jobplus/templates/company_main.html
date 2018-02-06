@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from 'macros.html' import render_form %}
+{% from 'macros_form.html' import render_form %}
 
 {% block title %}公司主页{% endblock %}
 
@@ -9,7 +9,7 @@
     <ul class="nav nav-pills nav-stacked" style="width:200px">
         <li role="presentation" class="active"><a href="{{ url_for('company.profile') }}">企业信息</a></li>
         <li role="presentation"><a href="#">职位管理</a></li>
-        <li role="presentation"><a href="#">职位申请</a></li>
+        <li role="presentation"><a href="{{url_for('company.create_job')}}">职位申请</a></li>
     </ul>
     <div class='form' style='width:500px; margin-left:250px; margin-top:    -146px'>
         {{ render_form(form, url_for('company.profile')) }}

@@ -30,6 +30,9 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{url_for('job.job_list')}}">职位</a></li>
                         <li><a href="{{url_for('company.company_list')}}">公司</a></li>
+                        {% if current_user.is_authenticated and current_user.is_admin %}
+                        <li><a href="{{url_for('admin.index')}}">控制台</a></li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if not current_user.is_authenticated %}
@@ -40,7 +43,12 @@
                         {% else %}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expended="false">{{ current_user.username }}<span class='caret'></span></a>
+                                <ul class="dropdown-menu">
+                                    {#{% if User.role == 10 %} 
                                     <li><a href="{{ url_for('company.profile') }}">个人主页</a></li>
+                                    {% elif User.role == 20 %}#}
+                                    <li><a href="{{ url_for('seeker.profile') }}">个人主页</a></li>
+                                    {#{% endif %}#}
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
                                 </ul>

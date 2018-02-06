@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm  # FlaskForm 为每一个表单(html表单)输入声明一个字段
-from wtforms import StringField, PasswordField, SelectField, SubmitField, BooleanField, ValidationError
+from wtforms import StringField, PasswordField, SelectField, SubmitField, BooleanField, ValidationError, TextAreaField, IntegerField
 from wtforms.validators import Length, Email, EqualTo, Required  # validators 添加了验证
 from jobplus.models import db, User, Seeker, Company, Job
 
@@ -39,6 +39,7 @@ class Company_RegisterForm(FlaskForm):
 
     def create_user(self):
         user = User()
+        user.role = 10
         user.username = self.username.data
         user.email = self.email.data
         user.password = self.password.data
@@ -131,3 +132,35 @@ class CompanyForm(FlaskForm):
     def validate_name(self, field):
         if Company.query.filter_by(name=field.data).first():
             raise ValidationError('公司已经存在')
+
+
+class JobForm(FlaskForm):
+
+    NATURE = [
+            ('PART_TIME', '兼职'),
+            ('FULL_TIME', '全职')
+            ]
+
+    job_name = StringField('职位名称', validators=[Required(), Length(5,32)])
+    wage_area = StringField('职位薪酬', validators=[Required(), Length(5,10)])
+    experience_required = StringField('工作经验', validators=[Required(), Length(5,10)])
+    edu_required = StringField('学历', validators=[Required(), Length(2,5)])
+    job_nature = SelectField('工作属性', choices=NATURE)
+    working_address = StringField('工作地点', validators=[Required(), Length(2, 32)])
+    welfare = StringField('工作福利', validators=[Required(), Length(2,32)])
+    job_description = StringField('工作描述', validators=[Required(), Length(2,256)])
+    submit = SubmitField('提交')
+
+    def create_job(self):
+        job = Job()
+        job.job_name = self.job_name
+        job.wage_area = self.wage_area
+        job.experience_required = self.experience_required
+        job.edu_required = self.edu_required
+        job.working_address = self.working_address
+        job.welfare = self.welfare
+        job.job_description = self.job_description
+        db.session.add(job)
+        db.session.commit()
+        return job
+    
