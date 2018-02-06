@@ -1,0 +1,44 @@
+{% extends 'admin/index.html' %}
+{% from "macros_page.html" import render_pagination %}
+
+{% block title %}
+管理－职位
+{% endblock %}
+
+{% block admin %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>公司</th>
+            <th>操作</th>
+        </tr>
+        <tbody>
+        {% for job in pagination.items %}
+        {% set company_id = job.company_id %}
+        {% set company = Company.query.get_or_404(company_id) %}
+            <tr>
+                <td>{{job.id}}</td>
+                <td>{{job.job_name}}</td>
+                <td>{{company.company_name}}</td>
+                <td>
+                    <!-- 使用了两个 Bootstrap 的 icon 代表编辑和删除操作 -->
+                    <div class="btn-group" role="group">
+                        <a href="" type="button" class="btn btn-default" title="编辑">
+                            <span class="glyphicon glyphicon-pencil" title="编辑" aria-hidden="true"></span>
+                        </a>
+                        <a href="" type="button" class="btn btn-default" title="删除">
+                            <span class="glyphicon glyphicon-trash" title="删除" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </thead>
+</table>
+
+{{render_pagination(pagination, 'admin.companys')}}
+{% endblock %}
+

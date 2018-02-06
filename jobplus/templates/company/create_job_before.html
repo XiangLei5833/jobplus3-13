@@ -1,0 +1,38 @@
+{% extends "company_main.html" %}
+
+{% block title %}
+添加职位
+{% endblock %}
+
+{% block body %}
+<div class="left" style="float:left">
+    <h1>企业</h2>
+    <ul class="nav nav-pills nav-stacked" style="width:200px">
+        <li role="presentation" ><a href="{{ url_for('company.profile') }}">企业信息</a></li>
+        <li role="presentation"><a href="#">职位管理</a></li>
+        <li role="presentation" class="active"><a href="{{url_for('company.create_before')}}">职位申请</a></li>
+    </ul>
+</div>
+<div class="right" style="float:left">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>caozuo</th>
+            </tr>
+            <tbody>
+                <tr>
+                    <td>tianjiazhiwei</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <a href="{{url_for('company.create_job')}}"></a>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </thead>
+    </table>
+</div>
+{% endblock %}
+                                
