@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from 'macros_form.html' import render_form %}
+
+{% block title %}个人主页{% endblock %}
+
+{% block body %}
+<div class='form'>
+    <h2>用户</h2>
+    <ul class="nav nav-pills nav-stacked" style="width:200px">
+        <li role="presentation"><a href="{{ url_for('seeker.profile') }}">个人信息</a></li>
+        <li role="presentation"><a href="{{url_for('seeker.resume')}}">简历管理</a></li>
+        <li role="presentation" class="active"><a href="{{url_for('seeker.deliver')}}">投递管理</a></li>
+    </ul>
+
+    <div class='form' style='width:500px; margin-left:250px; margin-top:-146px'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>职位名称</th>
+                    <th>所属行业</th>
+                    <th>公司名称</th>
+                    <th>操作</th>
+                </tr>
+                <tbody> 
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </tbody>
+            </thead>
+        </table>
+    </div>
+</div>
+{% endblock %}
+

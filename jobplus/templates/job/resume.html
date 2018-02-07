@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}个人主页{% endblock %}
+
+{% block body %}
+<div class='form'>
+    <h2>用户</h2>
+    <ul class="nav nav-pills nav-stacked" style="width:200px">
+        <li role="presentation"><a href="{{ url_for('seeker.profile') }}">个人信息</a></li>
+        <li role="presentation" class="active"><a href="{{url_for('seeker.resume')}}">简历管理</a></li>
+        <li role="presentation"><a href="{{url_for('seeker.deliver')}}">投递管理</a></li>
+    </ul>
+
+    <div class='form' style='width:500px; margin-left:250px; margin-top:-180px'>
+        <h3>提交简历</h3>
+        <hr style="border-top:2px solid grey;"/>
+        <input type="file" id="exampleInputFile">
+        <p class="help-block">提交简历进入网站以向各大公司投递</p>
+    </div>
+</div>
+{% endblock %}
