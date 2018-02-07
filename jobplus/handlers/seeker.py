@@ -10,3 +10,12 @@ def profile():
         form.create_seeker()
         flash('已保存', 'success')
     return render_template('seeker_main.html', form=form)
+
+@seeker.route('/resume')
+def resume():
+    return render_template('job/resume.html')
+
+@seeker.route('/deliver')
+def deliver():
+    return render_template('job/deliver.html')
+

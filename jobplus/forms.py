@@ -133,6 +133,12 @@ class CompanyForm(FlaskForm):
         if Company.query.filter_by(name=field.data).first():
             raise ValidationError('公司已经存在')
 
+    def update_company(self, company):
+        self.populate_obj(company)
+        db.session.add(company)
+        db.session.commit()
+        return company
+
 
 class JobForm(FlaskForm):
 
@@ -164,3 +170,8 @@ class JobForm(FlaskForm):
         db.session.commit()
         return job
     
+    def update_job(self, job):
+        self.populate_obj(job)
+        db.session.add(job)
+        db.session.commit()
+        return job

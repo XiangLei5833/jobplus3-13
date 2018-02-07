@@ -3,14 +3,14 @@
 from flask_login import login_user, logout_user, login_required
 from flask import Blueprint, render_template, flash, redirect, url_for, request, current_app
 from jobplus.forms import LoginForm, Seeker_RegisterForm, Company_RegisterForm
-from jobplus.models import User, Company, Job
+from jobplus.models import User, Company, Job, db
 
 front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
     companys = Company.query.filter().limit(9)
-    jobs = Job.query.filter().limit(9)
+    jobs = Job.query.order_by(db.desc(Job.id)).limit(9)
     return render_template('index.html', companys=companys, jobs=jobs, Company=Company, User=User)
 
 @front.route('/login', methods=['GET', 'POST'])

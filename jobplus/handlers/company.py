@@ -23,8 +23,13 @@ def create_job():
     if form.validate_on_submit():
         form.create_job()
         flash('职位创建成功', 'success')
+        return redirect(url_for('company.profile'))
     return render_template('company/create_job.html', form=form)
     
+@company.route('/manage')
+def manage():
+    #job = Job.query.get_or_404(company_id)
+    return render_template('company/manage.html')
 
 @company.route('/')
 def company_list():

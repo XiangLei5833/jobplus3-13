@@ -8,11 +8,12 @@
     <h2>用户</h2>
     <ul class="nav nav-pills nav-stacked" style="width:200px">
         <li role="presentation" class="active"><a href="{{ url_for('seeker.profile') }}">个人信息</a></li>
-        <li role="presentation"><a href="#">简历管理</a></li>
-        <li role="presentation"><a href="#">投递管理</a></li>
+        <li role="presentation"><a href="{{url_for('seeker.resume')}}">简历管理</a></li>
+        <li role="presentation"><a href="{{url_for('seeker.deliver')}}">投递管理</a></li>
     </ul>
-        <div class='form' style='width:500px; margin-left:250px; margin-top:-146px'>
-            {{ render_form(form, url_for('seeker.profile')) }}
-        </div>
+
+    <div class='form' style='width:500px; margin-left:250px; margin-top:-146px'>
+        {{ render_form(form, url_for('seeker.profile')) }}
+    </div>
 </div>
 {% endblock %}
