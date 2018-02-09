@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from 'macros_form.html' import render_form %}
+
+{% block title %}编辑公司{% endblock %}
+
+{% block body %}
+<div class='form'>
+    <h2>编辑公司</h2>
+    <ul class="nav nav-pills nav-stacked" style="width:200px">
+        <li role="presentation"><a href="{{ url_for('company.profile') }}">企业信息</a></li>
+        <li role="presentation"><a href="{{url_for('company.manage')}}">职位管理</a></li>
+        <li role="presentation" class="active"><a href="{{url_for('company.create_job')}}">职位申请</a></li>
+    </ul>
+    <div class='form' style='width:500px; margin-left:250px; margin-top:-120px'>
+        {{ render_form(form, url_for('company.edit_job', id=job.id)) }}
+    </div>
+</div>  
+{% endblock %}
