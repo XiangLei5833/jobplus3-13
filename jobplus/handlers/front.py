@@ -11,7 +11,7 @@ front = Blueprint('front', __name__)
 def index():
     companys = Company.query.filter().limit(9)
     jobs = Job.query.order_by(db.desc(Job.id)).limit(9)
-    return render_template('index.html', companys=companys, jobs=jobs, Company=Company, User=User)
+    return render_template('index.html', companys=companys, jobs=jobs, Company=Company)
 
 @front.route('/login', methods=['GET', 'POST'])
 def login():

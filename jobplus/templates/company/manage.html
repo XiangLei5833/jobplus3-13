@@ -1,36 +1,57 @@
 {% extends "base.html" %}
 {% from 'macros_form.html' import render_form %}
 
-{% block title %}公司主页{% endblock %}
+{% block title %}职位管理{% endblock %}
 
 {% block body %}
 <div class='form'>
-    <h1>企业</h2>
+    <h2>职位管理</h2>
     <ul class="nav nav-pills nav-stacked" style="width:200px">
         <li role="presentation"><a href="{{ url_for('company.profile')}}">企业信息</a></li>
         <li role="presentation" class="active"><a href="{{url_for('company.manage')}}">职位管理</a></li>
         <li role="presentation"><a href="{{url_for('company.create_job')}}">职位申请</a></li>
     </ul>
-    <div class='form' style='width:500px; margin-left:250px; margin-top:-146px'>       
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>职位名称</th>
-                    <th>职位薪酬</th>
-                    <th>职位属性</th>
-                    <th>职位要求</th>
-                    <th>操作</th> 
-                </tr>
-                <tbody>
+    <div style='margin-left:250px; margin-top:-120px'>
+        <div>
+            <a type="button" class="btn btn-primary" href="/companys/create">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                添加职位
+            </a>
+        </div>
+            
+        <div class='form' style='width:500px;'>       
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
+                        <th>职位名称</th>
+                        <th>职位薪酬</th>
+                        <th>职位属性</th>
+                        <th>职位要求</th>
+                        <th>操作</th> 
                     </tr>
-                </tbody>
-            </thead>
-        </table>
+                    <tbody>
+                    {% for job in jobs %}
+                        <tr>
+                            <td>{{job.job_name}}</td>
+                            <td>{{job.wage_area}}</td>
+                            <td>{{job.job_nature}}</td>
+                            <td>{{job.experience_required}}/{{job.edu_required}}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{url_for('company.edit_job', id=job.id)}}" type="button" class="btn btn-default" title="编辑">
+                                        <span class="glyphicon glyphicon-pencil" title="编辑" aria-hidden="true"></span>
+                                    </a>
+                                    <a href="{{url_for('company.delete_job', id=job.id)}}" type="button" class="btn btn-default" title="删除">
+                                        <span class="glyphicon glyphicon-trash" title="删除" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}

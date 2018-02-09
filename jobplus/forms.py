@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm  # FlaskForm 为每一个表单(html表单)输入声明一个字段
 from wtforms import StringField, PasswordField, SelectField, SubmitField, BooleanField, ValidationError, TextAreaField, IntegerField
 from wtforms.validators import Length, Email, EqualTo, Required  # validators 添加了验证
+from flask_login import current_user
 from jobplus.models import db, User, Seeker, Company, Job
 
 class Seeker_RegisterForm(FlaskForm):
@@ -96,6 +97,7 @@ class SeekerForm(FlaskForm):
 
     def create_seeker(self):
         seeker = Seeker()
+        seeker.user.id = current_user.id
         seeker.name = self.name.data
         seeker.gender = self.gender.data
         seeker.age = self.age.data
@@ -120,6 +122,7 @@ class CompanyForm(FlaskForm):
 
     def create_company(self):
         company = Company()
+        company.user_id = current_user.id
         company.company_name = self.company_name.data
         company.offical_websit = self.offical_websit.data
         company.address = self.offical_websit.data
@@ -159,13 +162,15 @@ class JobForm(FlaskForm):
 
     def create_job(self):
         job = Job()
-        job.job_name = self.job_name
-        job.wage_area = self.wage_area
-        job.experience_required = self.experience_required
-        job.edu_required = self.edu_required
-        job.working_address = self.working_address
-        job.welfare = self.welfare
-        job.job_description = self.job_description
+        company = Company.query.filter_by(user_id=current_user.id).first()
+        job.company_id = company.id
+        job.job_name = self.job_name.data
+        job.wage_area = self.wage_area.data
+        job.experience_required = self.experience_required.data
+        job.edu_required = self.edu_required.data
+        job.working_address = self.working_address.data
+        job.welfare = self.welfare.data
+        job.job_description = self.job_description.data
         db.session.add(job)
         db.session.commit()
         return job

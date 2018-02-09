@@ -86,6 +86,7 @@ class Seeker(Base):
     working_years = db.Column(db.Integer)
     current_position = db.Column(db.String(128))
     except_position = db.Column(db.String(128), nullable=False)
+    user = db.relationship('User')
 
     def __repr__(self):
         return '<Seeker:{}>'.format(self.name)
@@ -112,6 +113,7 @@ class Company(Base):
     position_num = db.Column(db.Integer)
     company_TEL = db.Column(db.String(16))
     job_list = db.relationship('Job')
+    user = db.relationship('User')
 
     def __repr__(self):
         return '<Company:{}>'.format(self.company_name)
@@ -141,10 +143,7 @@ class Job(Base):
     working_address = db.Column(db.String(16), nullable=False)
     job_tempt = db.Column(db.String(256))
     welfare = db.Column(db.String(8))
-    company_info = db.relationship('Company')
-
-    release_date = db.Column(db.DateTime, default=datetime.utcnow)
-
+    release_date = db.Column(db.String(8), default=(datetime.utcnow()).strftime('%H:%M'))
     job_description = db.Column(db.String(256))
     company = db.relationship('Company', uselist=False)
 

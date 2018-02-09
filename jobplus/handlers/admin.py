@@ -32,7 +32,7 @@ def jobs():
             )
     return render_template('admin/jobs.html', pagination=pagination, Company=Company)
 
-@admin.route('company/<int:id>/edit', methods=['GET','POST'])
+@admin.route('/company/<int:id>/edit', methods=['GET','POST'])
 @admin_required
 def edit_company(id):
     company = Company.query.get_or_404(id)
@@ -43,7 +43,7 @@ def edit_company(id):
         return redirect(url_for('admin.companys'))
     return render_template('admin/edit_company.html', form=form, company=company)
 
-@admin.route('company/<int:id>/delete')
+@admin.route('/company/<int:id>/delete')
 @admin_required
 def delete_company(id):
     company = Company.query.get_or_404(id)
@@ -52,7 +52,7 @@ def delete_company(id):
     flash('公司删除成功', 'success')
     return redirect(url_for('admin.companys'))
 
-@admin.route('job/<int:company_id>/edit', methods=['GET','POST'])
+@admin.route('/job/<int:company_id>/edit', methods=['GET','POST'])
 @admin_required
 def edit_job(company_id):
     job = Job.query.get_or_404(company_id)
@@ -63,7 +63,7 @@ def edit_job(company_id):
         return redirect(url_for('admin.jobs'))
     return render_template('admin/edit_job.html', form=form, job=job)
 
-@admin.route('job/<int:company_id>/delete')
+@admin.route('/job/<int:company_id>/delete')
 @admin_required
 def delete_job(company_id):
     job = Job.query.get_or_404(id)
