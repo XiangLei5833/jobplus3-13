@@ -25,8 +25,9 @@ def create_job():
     
 @company.route('/manage')
 def manage():
-    company = Company.query.filter_by(user_id=current_user.id).first()
-    jobs = Job.query.filter_by(company_id=company.id)
+    if Company.query.filter_by(user_id=current_user.id).first():
+        company = Company.query.filter_by(user_id=current_user.id).first()
+        jobs = Job.query.filter_by(company_id=company.id)
     return render_template('company/manage.html', jobs=jobs)
 
 @company.route('/<int:id>/edit', methods=['GET', 'POST'])
